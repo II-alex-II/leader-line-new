@@ -1,0 +1,34 @@
+{
+  "name": "leader-line-new",
+  "version": "1.0.0",
+  "description": "Draw a leader line in your web page. export lib",
+  "main": "index.js",
+  "types": "types/index.d.ts",
+  "homepage": "https://anseki.github.io/leader-line/",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "leader",
+    "line",
+    "markup",
+    "arrow",
+    "attention",
+    "highlight",
+    "spotlight",
+    "bubble",
+    "svg",
+    "export leader-line",
+    "import leader-line",
+    "types leader-line"
+  ],
+  "license": "MIT",
+  "authors": [
+    "anseki <AnSeki.aff@gmail.com>",
+    "modify: <radchenko.oskh@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:II-alex-II/leader-line-new.git"
+  }
+}
