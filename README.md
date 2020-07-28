@@ -3,7 +3,7 @@
 -[x] Add export
 -[x] Add types
 ## Decision issues
-[solution issues and many](https://github.com/anseki/leader-line/pull/147])
+[solution issues and many](https://github.com/anseki/leader-line/pull/147)
 
 ## Example use with React 
 [Example use with React code](https://github.com/II-alex-II/react-leader-line)
