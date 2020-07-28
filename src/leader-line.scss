@@ -1,0 +1,64 @@
+
+$app_id: leader-line;
+
+.#{$app_id} {
+  position: absolute;
+  overflow: visible !important; // Commonly used style `svg:not(:root)` is high scored.
+  pointer-events: none !important;
+  font-size: 16px; // for label
+}
+
+##{$app_id}-defs {
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 0; // coordinates for avoiding making margin at the bottom of body in Trident.
+  top: 0;
+}
+
+.#{$app_id}-line-path {
+  fill: none;
+}
+
+.#{$app_id}-mask-bg-rect {
+  fill: white;
+}
+
+.#{$app_id}-caps-mask-anchor,
+.#{$app_id}-caps-mask-marker-shape {
+  fill: black;
+}
+
+.#{$app_id}-caps-mask-anchor {
+  // for attachment
+  stroke: black;
+}
+
+.#{$app_id}-caps-mask-line,
+.#{$app_id}-plugs-face {
+  // Show only markers.
+  stroke: rgba(0, 0, 0, 0); /* `transparent` might not be supported */
+}
+
+.#{$app_id}-line-mask-shape {
+  stroke: white;
+}
+
+.#{$app_id}-line-outline-mask-shape {
+  stroke: black;
+}
+
+.#{$app_id}-plug-mask-shape {
+  fill: white;
+  stroke: black;
+}
+
+.#{$app_id}-plug-outline-mask-shape {
+  fill: black;
+  stroke: white;
+}
+
+.#{$app_id}-areaAnchor {
+  position: absolute;
+  overflow: visible !important;
+}

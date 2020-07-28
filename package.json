@@ -1,13 +1,8 @@
 {
   "name": "leader-line-new",
-  "version": "1.0.0",
-  "description": "Draw a leader line in your web page. export lib",
-  "main": "index.js",
-  "types": "types/index.d.ts",
-  "homepage": "https://anseki.github.io/leader-line/",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "1.1.5",
+  "title": "LeaderLine",
+  "description": "Draw a leader line in your web page. Export lib",
   "keywords": [
     "leader",
     "line",
@@ -22,13 +17,34 @@
     "import leader-line",
     "types leader-line"
   ],
+  "main": "leader-line.min.js",
+  "types": "types/index.d.ts",
+  "devDependencies": {
+    "anim-event": "^1.0.15",
+    "cheerio": "^1.0.0-rc.2",
+    "clean-css": "^4.1.9",
+    "grunt": "^1.0.2",
+    "grunt-task-helper": "^0.3.10",
+    "htmlclean": "^3.0.8",
+    "jasmine-core": "^2.99.1",
+    "log4js": "^2.5.3",
+    "node-static-alias": "^1.0.0",
+    "plain-draggable": "^2.0.24",
+    "pre-proc": "^0.2.8",
+    "test-page-loader": "1.0.7",
+    "uglify-js": "^3.3.11"
+  },
+  "scripts": {
+    "test": "node ./test/httpd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:II-alex-II/leader-line-new.git"
+  },
+  "bugs": "https://github.com/II-alex-II/leader-line/issues",
   "license": "MIT",
   "authors": [
     "anseki <AnSeki.aff@gmail.com>",
     "modify: <radchenko.oskh@gmail.com>"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com:II-alex-II/leader-line-new.git"
-  }
+  ]
 }

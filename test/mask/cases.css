@@ -1,0 +1,12 @@
+
+.ll-view {
+  margin: 10px;
+  width: 320px;
+  height: 320px;
+  background-color: #eae7c5;
+  position: relative;
+}
+
+.anchor { position: absolute; }
+.anchor-0 { background-color: rgba(127, 205, 255, 0.8); }
+.anchor-1 { background-color: rgba(255, 127, 205, 0.8); }

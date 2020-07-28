@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>symbol</title>
+
+  <style>
+
+svg {
+  display: block;
+  background-color: #eee;
+  margin: 10px;
+  overflow: visible;
+}
+
+#grid {
+  fill: none;
+  stroke-width: 0.02px;
+}
+
+#grid1 { stroke: #999; stroke-dasharray: 0.1px; }
+#grid2 { stroke: #999; }
+#grid3 { stroke: #f00; }
+
+.line {
+  fill: none;
+  stroke: rgba(255, 127, 80, 0.6);
+  stroke-width: 4px;
+}
+
+.size {
+  fill: rgba(0, 153, 10, 0.2);
+}
+
+.face {
+  fill: rgba(15, 51, 242, 0.6);
+}
+
+.outline-base,
+.outline-max {
+  fill: none;
+  stroke: rgba(242, 15, 80, 0.6);
+  display: none;
+}
+
+.btn-base,
+.btn-max { cursor: pointer; }
+.btn-base { fill: rgb(207, 122, 146); }
+.btn-max { fill: rgb(191, 71, 105); }
+
+.btn-base:hover ~ .outline-base { display: inline; }
+.btn-max:hover ~ .outline-max { display: inline; }
+
+  </style>
+
+  <script>
+
+window.addEventListener('load', () => {
+
+  Array.prototype.slice.call(document.getElementsByTagName('svg')).forEach(svg => {
+    var SVG_NS = 'http://www.w3.org/2000/svg', BTN_R = 1, BTN_MARGIN = 0.25,
+      symbol = svg.getElementsByClassName('symbol')[0],
+      viewBox, defs, face, outlineBase, outlineMax, mask, maskSymbol, btnBase, btnMax;
+    if (symbol && symbol.id) {
+
+      defs = svg.appendChild(document.createElementNS(SVG_NS, 'defs'));
+      defs.appendChild(symbol);
+      face = svg.appendChild(document.createElementNS(SVG_NS, 'use'));
+      face.href.baseVal = `#${symbol.id}`;
+      face.className.baseVal = 'face';
+
+      if ((outlineBase = svg.getElementsByClassName('outline-base')[0]) &&
+          (outlineMax = svg.getElementsByClassName('outline-max')[0])) {
+        mask = defs.appendChild(document.createElementNS(SVG_NS, 'mask'));
+        mask.id = `${symbol.id}-mask`;
+
+        maskSymbol = mask.appendChild(document.createElementNS(SVG_NS, 'use'));
+        maskSymbol.href.baseVal = `#${symbol.id}`;
+        maskSymbol.style.fill = 'white';
+
+        btnBase = svg.appendChild(document.createElementNS(SVG_NS, 'circle'));
+        btnMax = svg.appendChild(document.createElementNS(SVG_NS, 'circle'));
+        btnBase.appendChild(document.createElementNS(SVG_NS, 'title')).textContent = 'outline-base';
+        btnMax.appendChild(document.createElementNS(SVG_NS, 'title')).textContent = 'outline-max';
+        btnBase.className.baseVal = 'btn-base';
+        btnMax.className.baseVal = 'btn-max';
+        viewBox = svg.viewBox.baseVal;
+        btnBase.r.baseVal.value = btnMax.r.baseVal.value = BTN_R;
+        btnBase.cx.baseVal.value = btnMax.cx.baseVal.value = viewBox.x + viewBox.width + BTN_R + BTN_MARGIN;
+        btnBase.cy.baseVal.value = viewBox.y + BTN_R;
+        btnMax.cy.baseVal.value = viewBox.y + BTN_R * 3 + BTN_MARGIN;
+
+        outlineBase.href.baseVal = outlineMax.href.baseVal = `#${symbol.id}`;
+        outlineBase.style.mask = outlineMax.style.mask = `url(#${symbol.id}-mask)`;
+        svg.appendChild(outlineBase);
+        svg.appendChild(outlineMax);
+      }
+    }
+  });
+
+}, false);
+
+  </script>
+
+</head>
+<body>
+
+  <svg version="1.1" width="0" height="0">
+    <defs>
+      <g id="grid">
+        <path id="grid1" d="
+          M0,0 h24 m-24,1 h24 m-24,1 h24 m-24,1 h24 m-24,1 h24
+          m-24,1 h24 m-24,1 h24 m-24,1 h24 m-24,1 h24 m-24,1 h24
+          m-24,1 h24 m-24,1 h24 m-24,1 h24 m-24,1 h24 m-24,1 h24
+          m-24,1 h24 m-24,1 h24 m-24,1 h24 m-24,1 h24 m-24,1 h24
+          m-24,1 h24 m-24,1 h24 m-24,1 h24 m-24,1 h24 m-24,1 h24
+          M0,0 v24 m1,-24 v24 m1,-24 v24 m1,-24 v24 m1,-24 v24
+          m1,-24 v24 m1,-24 v24 m1,-24 v24 m1,-24 v24 m1,-24 v24
+          m1,-24 v24 m1,-24 v24 m1,-24 v24 m1,-24 v24 m1,-24 v24
+          m1,-24 v24 m1,-24 v24 m1,-24 v24 m1,-24 v24 m1,-24 v24
+          m1,-24 v24 m1,-24 v24 m1,-24 v24 m1,-24 v24 m1,-24 v24
+          " />
+        <path id="grid2" d="
+          M0,0 h24 m-24,4 h24 m-24,4 h24 m-24,4 h24 m-24,4 h24
+          m-24,4 h24 m-24,4 h24
+          M0,0 v24 m4,-24 v24 m4,-24 v24 m4,-24 v24 m4,-24 v24
+          m4,-24 v24 m4,-24 v24
+          " />
+        <path id="grid3" d="
+          M0,12 h24 M12,0 v24
+          M4,4 h16 v16 h-16 z
+          " />
+      </g>
+    </defs>
+  </svg>
+
+  <!--
+     A symbol has `id` and `symbol` class.
+     `rect.size` is required for `BBox`.
+     `use.outline-base` and `use.outline-max` are required for `outlineBase` and `outlineMax`. (stroke-width / 2 = *size)
+       A symbol that doesn't have these two doesn't support outline.
+
+     A symbol is able to have classes:
+     - `prop-*` :       Add a `*` property. e.g. `prop-noRotate`
+     - `varId-*` :      Add a variable that has `*` as name and `id` as value. e.g. `varId-DEFAULT_END_PLUG`
+     - `no-overhead` :  Disable `overhead`.
+  -->
+
+  <svg version="1.1" viewBox="-12 -12 24 24" width="720" height="720">
+    <use xlink:href="#grid" x="-12" y="-12" />
+    <path class="line" d="M-12,0 L0,0" />
+
+    <circle id="disc" class="symbol prop-noRotate no-overhead"
+      cx="0" cy="0" r="5" />
+
+    <rect class="size"          x="-5" y="-5" width="10" height="10" />
+    <use class="outline-base"   stroke-width="2" />
+    <use class="outline-max"    stroke-width="8" />
+
+  </svg>
+
+  <svg version="1.1" viewBox="-12 -12 24 24" width="720" height="720">
+    <use xlink:href="#grid" x="-12" y="-12" />
+    <path class="line" d="M-12,0 L0,0" />
+
+    <rect id="square" class="symbol prop-noRotate no-overhead"
+      x="-5" y="-5" width="10" height="10" />
+
+    <rect class="size"          x="-5" y="-5" width="10" height="10" />
+    <use class="outline-base"   stroke-width="2" />
+    <use class="outline-max"    stroke-width="8" />
+
+  </svg>
+
+  <svg version="1.1" viewBox="-12 -12 24 24" width="720" height="720">
+    <use xlink:href="#grid" x="-12" y="-12" />
+    <path class="line" d="M-12,0 L0,0" />
+
+    <polygon id="arrow1" class="symbol varId-DEFAULT_END_PLUG"
+      points="-8,-8 8,0 -8,8 -5,0" />
+
+    <rect class="size"          x="-8" y="-8" width="16" height="16" />
+    <use class="outline-base"   stroke-width="4" />
+    <use class="outline-max"    stroke-width="6" />
+
+  </svg>
+
+  <svg version="1.1" viewBox="-12 -12 24 24" width="720" height="720">
+    <use xlink:href="#grid" x="-12" y="-12" />
+    <path class="line" d="M-12,0 L0,0" />
+
+    <polygon id="arrow2" class="symbol"
+      points="-4,-8 4,0 -4,8 -7,5 -2,0 -7,-5" />
+
+    <rect class="size"          x="-7" y="-8" width="11" height="16" />
+    <use class="outline-base"   stroke-width="2" />
+    <use class="outline-max"    stroke-width="3.5" />
+
+  </svg>
+
+  <svg version="1.1" viewBox="-12 -12 24 24" width="720" height="720">
+    <use xlink:href="#grid" x="-12" y="-12" />
+    <path class="line" d="M-12,0 L0,0" />
+
+    <polygon id="arrow3" class="symbol"
+      points="-4,-5 8,0 -4,5" />
+
+    <rect class="size"          x="-4" y="-5" width="12" height="10" />
+    <use class="outline-base"   stroke-width="2" />
+    <use class="outline-max"    stroke-width="5" />
+
+  </svg>
+
+  <svg version="1.1" viewBox="-37 -12 74 24" width="740" height="240">
+    <use xlink:href="#grid" x="-12" y="-12" />
+    <path class="line" d="M-37,0 L0,0" />
+
+    <g id="hand" class="symbol">
+      <path style="fill: #fcfcfc" d="M 9.19 11.14 h 4.75 c 1.38 0 2.49 -1.11 2.49 -2.49 c 0 -0.51 -0.15 -0.98 -0.41 -1.37 h 1.3 c 1.38 0 2.49 -1.11 2.49 -2.49 s -1.11 -2.53 -2.49 -2.53 h 1.02 c 1.38 0 2.49 -1.11 2.49 -2.49 s -1.11 -2.49 -2.49 -2.49 h 14.96 c 1.37 0 2.49 -1.11 2.49 -2.49 s -1.11 -2.49 -2.49 -2.49 H 16.58 C 16 -9.86 14.28 -11.14 9.7 -11.14 c -4.79 0 -6.55 3.42 -7.87 4.73 H -2.14 v 13.23 h 3.68 C 3.29 9.97 5.47 11.14 9.19 11.14 L 9.19 11.14 Z" />
+      <path style="fill: black" d="M 13.95 12 c 1.85 0 3.35 -1.5 3.35 -3.35 c 0 -0.17 -0.02 -0.34 -0.04 -0.51 h 0.07 c 1.85 0 3.35 -1.5 3.35 -3.35 c 0 -0.79 -0.27 -1.51 -0.72 -2.08 c 1.03 -0.57 1.74 -1.67 1.74 -2.93 c 0 -0.59 -0.16 -1.15 -0.43 -1.63 h 12.04 c 1.85 0 3.35 -1.5 3.35 -3.35 c 0 -1.85 -1.5 -3.35 -3.35 -3.35 H 17.2 C 16.26 -10.93 13.91 -12 9.7 -12 C 5.36 -12 3.22 -9.4 1.94 -7.84 c 0 0 -0.29 0.33 -0.5 0.57 c -0.63 0 -3.58 0 -3.58 0 C -2.61 -7.27 -3 -6.88 -3 -6.41 v 13.23 c 0 0.47 0.39 0.86 0.86 0.86 c 0 0 2.48 0 3.2 0 C 2.9 10.73 5.29 12 9.19 12 L 13.95 12 Z M 9.19 10.28 c -3.46 0 -5.33 -1.05 -6.9 -3.87 c -0.15 -0.27 -0.44 -0.44 -0.75 -0.44 c 0 0 -1.81 0 -2.82 0 V -5.55 c 1.06 0 3.11 0 3.11 0 c 0.25 0 0.44 -0.06 0.61 -0.25 l 0.83 -0.95 c 1.23 -1.49 2.91 -3.53 6.43 -3.53 c 3.45 0 4.9 0.74 5.57 1.72 h -4.3 c -0.48 0 -0.86 0.38 -0.86 0.86 s 0.39 0.86 0.86 0.86 h 22.34 c 0.9 0 1.63 0.73 1.63 1.63 c 0 0.9 -0.73 1.63 -1.63 1.63 H 15.83 c -0.48 0 -0.86 0.38 -0.86 0.86 c 0 0.47 0.39 0.86 0.86 0.86 h 2.52 c 0.9 0 1.63 0.73 1.63 1.63 s -0.73 1.63 -1.63 1.63 h -3.12 c -0.48 0 -0.86 0.38 -0.86 0.86 c 0 0.47 0.39 0.86 0.86 0.86 h 2.11 c 0.88 0 1.63 0.76 1.63 1.67 c 0 0.9 -0.73 1.63 -1.63 1.63 h -3.2 c -0.48 0 -0.86 0.39 -0.86 0.86 c 0 0.47 0.39 0.86 0.86 0.86 h 1.36 c 0.05 0.16 0.09 0.34 0.09 0.51 c 0 0.9 -0.73 1.63 -1.63 1.63 C 13.95 10.28 9.19 10.28 9.19 10.28 Z" />
+    </g>
+
+    <rect class="size"          x="-3" y="-12" width="40" height="24" />
+
+  </svg>
+
+  <svg version="1.1" viewBox="-96 -96 192 192" width="384" height="384">
+    <use xlink:href="#grid" x="-12" y="-12" />
+    <path class="line" d="M-96,0 L0,0" />
+
+    <g id="crosshair" class="symbol prop-noRotate no-overhead">
+      <path d="M 0 -78.97 c -43.54 0 -78.97 35.43 -78.97 78.97 c 0 43.54 35.43 78.97 78.97 78.97 s 78.97 -35.43 78.97 -78.97 C 78.97 -43.54 43.55 -78.97 0 -78.97 Z M 76.51 -1.21 h -9.91 v -9.11 h -2.43 v 9.11 h -11.45 c -0.64 -28.12 -23.38 -50.86 -51.5 -51.5 V -64.17 h 9.11 V -66.6 h -9.11 v -9.91 C 42.46 -75.86 75.86 -42.45 76.51 -1.21 Z M -1.21 -30.76 h -9.11 v 2.43 h 9.11 V -4.2 c -1.44 0.42 -2.57 1.54 -2.98 2.98 H -28.33 v -9.11 h -2.43 v 9.11 H -50.29 C -49.65 -28 -27.99 -49.65 -1.21 -50.29 V -30.76 Z M -30.76 1.21 v 9.11 h 2.43 v -9.11 H -4.2 c 0.42 1.44 1.54 2.57 2.98 2.98 v 24.13 h -9.11 v 2.43 h 9.11 v 19.53 C -27.99 49.65 -49.65 28 -50.29 1.21 H -30.76 Z M 1.22 30.75 h 9.11 v -2.43 h -9.11 V 4.2 c 1.44 -0.42 2.56 -1.54 2.98 -2.98 h 24.13 v 9.11 h 2.43 v -9.11 h 19.53 C 49.65 28 28 49.65 1.22 50.29 V 30.75 Z M 30.76 -1.21 v -9.11 h -2.43 v 9.11 H 4.2 c -0.42 -1.44 -1.54 -2.56 -2.98 -2.98 V -28.33 h 9.11 v -2.43 h -9.11 V -50.29 C 28 -49.65 49.65 -28 50.29 -1.21 H 30.76 Z M -1.21 -76.51 v 9.91 h -9.11 v 2.43 h 9.11 v 11.45 c -28.12 0.64 -50.86 23.38 -51.5 51.5 H -64.17 v -9.11 H -66.6 v 9.11 h -9.91 C -75.86 -42.45 -42.45 -75.86 -1.21 -76.51 Z M -76.51 1.21 h 9.91 v 9.11 h 2.43 v -9.11 h 11.45 c 0.64 28.12 23.38 50.86 51.5 51.5 v 11.45 h -9.11 v 2.43 h 9.11 v 9.91 C -42.45 75.86 -75.86 42.45 -76.51 1.21 Z M 1.22 76.51 v -9.91 h 9.11 v -2.43 h -9.11 v -11.45 c 28.12 -0.64 50.86 -23.38 51.5 -51.5 h 11.45 v 9.11 h 2.43 v -9.11 h 9.91 C 75.86 42.45 42.45 75.86 1.22 76.51 Z" />
+      <path d="M 0 83.58 L -7.1 96 L 7.1 96 Z" />
+      <path d="M 0 -83.58 L 7.1 -96 L -7.1 -96" />
+      <path d="M 83.58 0 L 96 7.1 L 96 -7.1 Z" />
+      <path d="M -83.58 0 L -96 -7.1 L -96 7.1 Z" />
+    </g>
+
+    <rect class="size"          x="-96" y="-96" width="192" height="192" />
+
+  </svg>
+
+</body>
+</html>

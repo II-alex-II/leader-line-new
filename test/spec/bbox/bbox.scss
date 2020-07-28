@@ -1,0 +1,83 @@
+@import "compass";
+
+html,
+body { border: solid #b27373; }
+html { background-color: #d6d6d6; }
+body { background-color: #f5deb3; }
+
+html,
+body { /* All zero clear */
+  margin: 0;
+  border-width: 0;
+  padding: 0;
+}
+
+#static {
+  width: 100px;
+  height: 50px;
+  background-color: rgba(127, 205, 255, 0.5);
+}
+
+#absolute {
+  width: 101px;
+  height: 51px;
+  position: absolute;
+  left: 128px;
+  top: 128px;
+  background-color: rgba(150, 255, 127, 0.5);
+}
+
+iframe {
+  width: 600px;
+  height: 400px;
+  position: absolute;
+  border: 2px solid #009;
+  padding: 4px;
+  background-color: #eee;
+}
+
+#iframe1 {
+  left: 8px;
+  top: 316px;
+}
+
+#iframe2 {
+  left: 32px;
+  top: 764px;
+}
+
+#overflow1-static { @extend #static; }
+#overflow2-absolute { @extend #absolute; }
+
+#overflow1,
+#overflow2 {
+  overflow: auto;
+  position: absolute;
+  border: 2px solid #090;
+  padding: 4px;
+  background-color: #eee;
+}
+
+#overflow1 {
+  left: 308px;
+  top: 16px;
+  width: 400px;
+  height: 400px;
+}
+
+#overflow2 {
+  left: 132px;
+  top: 64px;
+  width: 200px;
+  height: 200px;
+}
+
+.spacer {
+  margin: 10px;
+  width: 1600px;
+  height: 1600px;
+  @include background-image(linear-gradient(
+    #a48aa4 0,
+    #dabeda 100%
+    ));
+}
