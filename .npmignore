@@ -1,9 +1,13 @@
 # Created by .ignore support plugin (hsz.mobi)
+/img
 /node_modules
 /test
 /src
 .npmrc
 .gitignore
 .eslintrc.json
-
+bower.json
+Gruntfile.js
+package-lock.json
+.stylelintrc
 .
