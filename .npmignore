@@ -1,4 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
+.idea
 /img
 /node_modules
 /test
